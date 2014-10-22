@@ -1,8 +1,8 @@
 <template name="locations">
   <h3>Locations: </h3>
-  <ul>
+  <div class="container">
     {{#each locations}}
-      <li><a href="{{pathFor "location"}}">{{title}}</a></li>
+    <div class=".col-md-6"><a href="{{pathFor "location"}}">{{title}}</a> - {{description}}</div>
     {{/each}}
-  </ul>
+  </div>
 </template>
