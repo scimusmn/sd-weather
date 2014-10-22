@@ -2,18 +2,29 @@
 
 ## Publications ##
 
-All publications-related code. 
+All publications-related code.
 
 /+ ---------------------------------------------------- */
 
-// Publish all items
+/**
+ * Locations
+ *
+ * Publish all locations. There will only ever be a fixed number of locations
+ */
+Meteor.publish('allLocations', function() {
+    return Locations.find();
+});
 
+/**
+ * Items
+ *
+ * Publish all items
+ */
 Meteor.publish('allItems', function() {
-  return Items.find();
+    return Items.find();
 });
 
 // Publish a single item
-
 Meteor.publish('singleItem', function(id) {
-  return Items.find(id);
+    return Items.find(id);
 });
