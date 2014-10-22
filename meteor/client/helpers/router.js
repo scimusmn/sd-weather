@@ -22,7 +22,6 @@ var filters = {
         // do something
     },
 
-
 };
 
 Router.onBeforeAction(filters.myFilter, {only: ['items']});
