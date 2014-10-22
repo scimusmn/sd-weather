@@ -23,7 +23,7 @@ var filters = {
     },
 
 
-}
+};
 
 Router.onBeforeAction(filters.myFilter, {only: ['items']});
 
@@ -40,7 +40,7 @@ Router.map(function() {
         data: function () {
             return {
                 items: Items.find()
-            }
+            };
         }
     });
 
@@ -52,7 +52,7 @@ Router.map(function() {
         data: function () {
             return {
                 item: Items.findOne(this.params._id)
-            }
+            };
         }
     });
 
