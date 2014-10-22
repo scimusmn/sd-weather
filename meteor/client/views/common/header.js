@@ -3,9 +3,3 @@ Template.header.helpers({
     return Messages.find();
   },
 })
-
-Template.header.events({
-  'click .log-out': function () {
-    Meteor.logout();
-  }
-})

@@ -22,12 +22,6 @@ var filters = {
     // do something
   },
 
-  isLoggedIn: function() {
-    if (!(Meteor.loggingIn() || Meteor.user())) {
-      alert('Please Log In First.')
-      this.stop();
-    }
-  }
 
 }
 
@@ -70,13 +64,5 @@ Router.map(function() {
   });
 
   this.route('content');
-
-  // Users
-
-  this.route('login');
-
-  this.route('signup');
-
-  this.route('forgot');
 
 });

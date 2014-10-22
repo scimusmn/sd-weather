@@ -6,6 +6,6 @@ Custom Handlebars helpers.
 
 /+ ---------------------------------------------------- */
 
-Handlebars.registerHelper('myHelper', function(myArgument){
-  return "Hello, " + myArgument;
+Handlebars.registerHelper('thisYear', function(myArgument){
+  return new Date().getFullYear();
 });
