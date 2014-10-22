@@ -31,8 +31,35 @@ Router.onBeforeAction(filters.myFilter, {only: ['items']});
 
 Router.map(function() {
 
-    // Items
+    /**
+     * Locations
+     */
+    this.route('locations', {
+        waitOn: function () {
+            return Meteor.subscribe('allLocations');
+        },
+        data: function () {
+            return {
+                locations: Locations.find()
+            };
+        }
+    });
 
+    this.route('location', {
+        path: '/locations/:_id',
+        waitOn: function () {
+            return Meteor.subscribe('singleLocation', this.params._id);
+        },
+        data: function () {
+            return {
+                location: Locations.findOne(this.params._id)
+            };
+        }
+    });
+
+    /**
+     * Items
+     */
     this.route('items', {
         waitOn: function () {
             return Meteor.subscribe('allItems');
