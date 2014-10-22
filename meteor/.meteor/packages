@@ -6,4 +6,5 @@
 meteor-platform
 insecure
 d3
+iron:router
 
