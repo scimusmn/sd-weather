@@ -1,8 +1,15 @@
 <template name="locations">
+
   <h3>Locations: </h3>
-  <div class="container">
+  <div class="locations-grid">
     {{#each locations}}
-    <div class=".col-md-6"><a href="{{pathFor "location"}}">{{title}}</a> - {{description}}</div>
+    <div class="location {{lowerSpacesToDashes title}}">
+      <!--<a href="{{pathFor "location"}}">{{title}}</a><br>-->
+      <h1>{{title}}</h1>
+      <h2>Temperature: <div class="forecast-temp"></div></h2>
+      {{description}}
+    </div>
     {{/each}}
   </div>
+  <pre class="dev-json"></pre>
 </template>
