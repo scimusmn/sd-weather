@@ -35,6 +35,9 @@ var checkForecastAsync = function(latitude, longitude, callback) {
     //
     // Execute a callback to return the results
     //
+    // The first parameter is an error.
+    // The 2nd is the result of the call.
+    //
     callback(null, forecastResult);
 };
 
