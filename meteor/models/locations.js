@@ -1,9 +1,6 @@
-/* ---------------------------------------------------- +/
-
-## Locations ##
-
-All code related to the Locations collection goes here.
-
-/+ ---------------------------------------------------- */
-
+/**
+ *
+ * Server side - Locations
+ *
+ */
 Locations = new Meteor.Collection('locations');

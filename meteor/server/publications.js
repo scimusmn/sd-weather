@@ -13,6 +13,7 @@ All publications-related code.
  */
 Meteor.publish('allLocations', function() {
     return Locations.find();
+
 });
 
 // Publish a single item
