@@ -80,3 +80,60 @@ Meteor.methods({
         }
     }
 });
+
+var checkForecastCron = function(latitude, longitude) {
+    var apiKey = '76cbd9069c2c764b31570a5f661fb8c3';
+    var protocol = 'https://';
+    var apiDomain = 'api.forecast.io';
+    var apiType = 'forecast';
+    var url = protocol +
+        apiDomain + '/' +
+        apiType + '/' +
+        apiKey + '/' +
+        latitude + ',' +
+        longitude;
+    var forecastResult = HTTP.get(url);
+    console.log('Cron result - forecastResult - ', forecastResult);
+    return forecastResult;
+};
+
+/**
+ * Cron process to check the forecast.io weather every X minutes
+ */
+SyncedCron.add({
+    name: 'Check for the latest forecast.io weather data',
+    schedule: function(parser) {
+        /**
+         * Query calculations
+         *
+         * The forecast.io API allows us 1000 calls per day for free.
+         *
+         * We have 5 locations. Which gives us 200 calls per location per day.
+         *
+         * If we query every 10 minutes that gives us a bit of padding on the
+         * API limit.
+         */
+
+
+
+        //
+        // Dev cron timing
+        // Don't leave this running too long. It'll bork our API access
+        // return parser.text('every 20 seconds');
+        //
+
+        //
+        // Operational timing. I bet we only need to update the weather
+        // every 5 minutes
+        //
+        return parser.text('every 10 minutes');
+    },
+    job: function() {
+        var latitude = '33.259167';
+        var longitude = '-116.399167';
+        var forecast = checkForecastCron(latitude, longitude);
+        return forecast;
+    }
+});
+
+SyncedCron.start();
