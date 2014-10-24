@@ -114,12 +114,10 @@ SyncedCron.add({
          * API limit.
          */
 
-
-
         //
         // Dev cron timing
         // Don't leave this running too long. It'll bork our API access
-        // return parser.text('every 20 seconds');
+         //return parser.text('every 20 seconds');
         //
 
         //
@@ -129,11 +127,24 @@ SyncedCron.add({
         return parser.text('every 10 minutes');
     },
     job: function() {
+        // TODO cycle through locations
         var latitude = '33.259167';
         var longitude = '-116.399167';
-        var forecast = checkForecastCron(latitude, longitude);
-        return forecast;
+        var result = checkForecastCron(latitude, longitude);
+
+        // Get the data object from the JSON response
+        var forecast = result.data;
+
+        // Insert the forecast data into the Mongo database Weather model
+        Meteor.call('insertWeather', forecast, function(error, result) {
+            console.log('Server cron - error - ', error);
+            console.log('Server cron - forecast - ', result);
+            return result;
+        });
     }
 });
 
+/**
+ * Start cron process when the meteor app launches
+ */
 SyncedCron.start();
