@@ -10,9 +10,11 @@ All publications-related code.
  * Locations
  *
  * Publish all locations. There will only ever be a fixed number of locations
+ *
+ * Sort them by the prescribed order.
  */
 Meteor.publish('allLocations', function() {
-    return Locations.find();
+    return Locations.find({}, { sort: { order: 1 } });
 
 });
 
