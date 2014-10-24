@@ -102,6 +102,7 @@ var checkForecastCron = function(latitude, longitude) {
  */
 SyncedCron.add({
     name: 'Check for the latest forecast.io weather data',
+    lastCheck: 'value',
     schedule: function(parser) {
         /**
          * Query calculations
@@ -117,7 +118,7 @@ SyncedCron.add({
         //
         // Dev cron timing
         // Don't leave this running too long. It'll bork our API access
-         //return parser.text('every 20 seconds');
+        //return parser.text('every 20 seconds');
         //
 
         //
@@ -139,8 +140,8 @@ SyncedCron.add({
         Meteor.call('insertWeather', forecast, function(error, result) {
             console.log('Server cron - error - ', error);
             console.log('Server cron - forecast - ', result);
-            return result;
         });
+        return result;
     }
 });
 

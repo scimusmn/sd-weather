@@ -1,9 +1,7 @@
 <template name="locations">
-
-  <h3>Locations: </h3>
   <div class="locations-grid">
     {{#each locations}}
-    <div class="location {{lowerSpacesToDashes title}}">
+    <div class="location {{_id}}">
       <!--<a href="{{pathFor "location"}}">{{title}}</a><br>-->
       <h1>{{title}}</h1>
       <h2>Temperature: <div class="forecast-temp"></div></h2>
