@@ -70,7 +70,7 @@ Meteor.methods({
         var result;
         try {
             result = checkForecastSync(latitude, longitude);
-            console.log('Server checkForecast - ', result);
+            //console.log('Server checkForecast - ', result);
         }
         catch(e) {
             console.log('checkForecast error' + e);
@@ -93,7 +93,7 @@ var checkForecastCron = function(latitude, longitude) {
         latitude + ',' +
         longitude;
     var forecastResult = HTTP.get(url);
-    console.log('Cron result - forecastResult - ', forecastResult);
+    //console.log('Cron result - forecastResult - ', forecastResult);
     return forecastResult;
 };
 
@@ -125,23 +125,82 @@ SyncedCron.add({
         // Operational timing. I bet we only need to update the weather
         // every 5 minutes
         //
+
         return parser.text('every 10 minutes');
+        //return parser.text('every 20 seconds');
+        //return parser.text('every 5 seconds');
+        //return parser.text('every 1 seconds');
     },
+
     job: function() {
-        // TODO cycle through locations
-        var latitude = '33.259167';
-        var longitude = '-116.399167';
-        var result = checkForecastCron(latitude, longitude);
+        /**
+         * Check the cron history to find the order of the location previously
+         * updated with Forecast.io
+         */
+        var cronCollection = SyncedCron._collection;
+        // Only get the latest result. Ignore entries with no results (errors)
+        var latestCron = cronCollection.findOne(
+            { result: { $exists: true } }, {sort: {finishedAt: -1}, limit:1}
+        );
+        //console.log('latestCron - ', latestCron);
+
+        // Make sure to populate the value even if it doesn't exist in the DB
+        //
+        // This can happen during testing or if the location numbers change.
+        var latestOrder;
+        if(typeof latestCron === 'undefined'){
+            latestOrder = 0;
+        }
+        else {
+            if (latestCron.result.hasOwnProperty('locOrder')) {
+                latestOrder = latestCron.result.locOrder;
+            }
+            else {
+                latestOrder = 0;
+            }
+        }
+
+        //
+        // Itterate the locaction order. Loop back around to the start if we
+        // get to the max.
+        //
+        var locationsNum = Locations.find().count();
+        var locOrder;
+        if ( latestOrder === ( locationsNum - 1 ) ) {
+            locOrder = 0;
+        }
+        else {
+            locOrder = parseInt(latestOrder) + 1;
+        }
+
+        // Get details about the location we're about to check
+        var locationToRequest = Locations.findOne( { order: locOrder });
+        //console.log('locationToRequest - ', locationToRequest);
+
+        //
+        // Generate a forecast request reponse object to save to the
+        // cron collection. This lets us know the history of cron operations
+        // so that we can be efficient with our requests.
+        //
+        var f = {};
+        f.name = locationToRequest._id;
+        f.latitude = locationToRequest.latitude;
+        f.longitude = locationToRequest.longitude;
+        f.locOrder = locOrder;
+        var result = checkForecastCron(f.latitude, f.longitude);
 
         // Get the data object from the JSON response
         var forecast = result.data;
 
         // Insert the forecast data into the Mongo database Weather model
-        Meteor.call('insertWeather', forecast, function(error, result) {
-            console.log('Server cron - error - ', error);
-            console.log('Server cron - forecast - ', result);
+        Meteor.call('insertWeather', forecast, f.name, function(error, result) {
+            console.log('error - ', error);
+            console.log('result - ', result);
         });
-        return result;
+
+        // Return to the SyncedCron collection so that we can track the
+        // previous cron details next time around.
+        return f;
     }
 });
 

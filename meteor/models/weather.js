@@ -10,12 +10,14 @@ Weather = new Meteor.Collection('weather');
  * Weather methods
  */
 Meteor.methods({
-    insertWeather: function (weather) {
+    insertWeather: function (forecast, locId) {
+        console.log('locId - ', locId);
         Weather.insert({
-            time: weather.currently.time,
-            latitude: weather.latitude,
-            longitude: weather.longitude,
-            temperature: weather.currently.temperature
+            name: locId,
+            time: forecast.currently.time,
+            latitude: forecast.latitude,
+            longitude: forecast.longitude,
+            temperature: forecast.currently.temperature
         });
     },
 });
