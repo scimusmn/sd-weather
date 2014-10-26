@@ -30,7 +30,9 @@ Meteor.publish('allLocations', function() {
 
 });
 
-// Publish a single item
+/**
+ * Publish a single location
+ */
 Meteor.publish('singleLocation', function(id) {
     return Locations.find(id);
 });
