@@ -1,12 +1,16 @@
 <template name="locations">
   <div class="locations-grid">
     {{#each locations}}
-    <div class="location {{_id}}">
-      <!--<a href="{{pathFor "location"}}">{{title}}</a><br>-->
-      <h1>{{title}}</h1>
-      <h2>Temperature: <div class="forecast-temp"></div></h2>
-      {{description}}
+      <div class="location {{_id}}">
+        <h1>{{title}}</h1>
+        {{> locWeather}}
+      </div>
+      {{/each}}
     </div>
-    {{/each}}
-  </div>
+</template>
+
+<template name="locWeather">
+  Weather tempalte
+  <h2>Weather collection: name = {{weather.name}}</h2>
+  <h3>Weather collection: temp = {{weather.temperature}}</h3>
 </template>
