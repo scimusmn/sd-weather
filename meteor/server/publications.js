@@ -25,7 +25,7 @@ Meteor.publish('allLocations', function() {
 
     return [
         Locations.find({}, { sort: { order: 1 } }),
-        Weather.find({})
+        Weather.find({}, {sort: { time: -1}, limit: 20} )
     ];
 
 });

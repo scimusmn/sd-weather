@@ -22,7 +22,8 @@ Template.locations.events({
 
 Template.locWeather.helpers({
     weather: function() {
-        return Weather.findOne( { class: this._id } );
+
+        return Weather.findOne( { class: this._id }, { sort: {time: -1} } );
     }
 });
 
