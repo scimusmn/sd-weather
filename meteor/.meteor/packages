@@ -5,11 +5,11 @@
 
 meteor-platform
 insecure
-d3
 iron:router
 nemo64:bootstrap
 less
 http
 json
 percolatestudio:synced-cron
+d3
 
