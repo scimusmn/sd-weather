@@ -25,7 +25,8 @@ Meteor.publish('allLocations', function() {
 
     return [
         Locations.find({}, { sort: { order: 1 } }),
-        Weather.find({}, {sort: { time: -1}, limit: 20} )
+        Weather.find({})
+        //Weather.find({}, {sort: { time: -1}, limit: 20} )
     ];
 
 });
@@ -33,9 +34,9 @@ Meteor.publish('allLocations', function() {
 /**
  * Publish a single location
  */
-Meteor.publish('singleLocation', function(id) {
-    return Locations.find(id);
-});
+//Meteor.publish('singleLocation', function(id) {
+    //return Locations.find(id);
+//});
 
 /**
  * Items

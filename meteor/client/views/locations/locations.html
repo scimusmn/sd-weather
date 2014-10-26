@@ -1,16 +1,29 @@
 <template name="locations">
   <div class="locations-grid">
     {{#each locations}}
-      <div class="location {{_id}}">
-        <h1>{{title}}</h1>
-        {{> locWeather}}
-      </div>
-      {{/each}}
-    </div>
+      {{> singleLocation}}
+    {{/each}}
+  </div>
 </template>
 
-<template name="locWeather">
-  <h2>Weather collection: name = {{weather.name}}</h2>
-  <h3>Weather collection: temp = {{weather.temperature}}</h3>
-  <h3>Weather collection: time = {{weather.time}}</h3>
+<template name="singleLocation">
+  <div class="single-location {{_id}}">
+    Single location
+    {{special}}
+    {{#each weather}}
+      in here
+      {{> weather}}
+    {{/each}}
+    <!--<h1>{{title}}</h1>-->
+    <!--{{#each weather}}-->
+      <!--In each weather-->
+      <!--{{> weather}}-->
+    <!--{{/each}}-->
+  </div>
+</template>
+
+<template name="weather">
+  Weather template
+  <h3>Weather collection: temp = {{temperature}}</h3>
+  <h3>Weather collection: time = {{time}}</h3>
 </template>

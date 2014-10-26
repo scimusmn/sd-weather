@@ -37,24 +37,33 @@ Router.map(function() {
         waitOn: function () {
             return Meteor.subscribe('allLocations');
         },
-        data: function () {
-            return {
-                locations: Locations.find()
-            };
-        }
+        //data: function () {
+            //return {
+                //locations: Locations.find()
+            //};
+        //}
     });
 
-    this.route('location', {
-        path: '/locations/:_id',
-        waitOn: function () {
-            return Meteor.subscribe('singleLocation', this.params._id);
-        },
-        data: function () {
-            return {
-                location: Locations.findOne(this.params._id)
-            };
-        }
-    });
+    //this.route('weather', {
+        //path: '/weather/:_id',
+        //waitOn: function () {
+            //return Meteor.subscribe('weather', this.params._id);
+        //},
+    //});
+
+
+
+    //this.route('location', {
+        //path: '/locations/:_id',
+        //waitOn: function () {
+            //return Meteor.subscribe('singleLocation', this.params._id);
+        //},
+        //data: function () {
+            //return {
+                //location: Locations.findOne(this.params._id)
+            //};
+        //}
+    //});
 
     /**
      * Items
