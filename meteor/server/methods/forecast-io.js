@@ -111,7 +111,7 @@ SyncedCron.add({
          *
          * We have 5 locations. Which gives us 200 calls per location per day.
          *
-         * If we query every 10 minutes that gives us a bit of padding on the
+         * If we query every few minutes that gives us a bit of padding on the
          * API limit.
          */
 
