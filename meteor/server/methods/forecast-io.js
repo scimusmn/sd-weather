@@ -183,7 +183,8 @@ SyncedCron.add({
         // so that we can be efficient with our requests.
         //
         var f = {};
-        f.name = locationToRequest._id;
+        f.name = locationToRequest.title;
+        f.class = locationToRequest._id;
         f.latitude = locationToRequest.latitude;
         f.longitude = locationToRequest.longitude;
         f.locOrder = locOrder;
@@ -193,7 +194,7 @@ SyncedCron.add({
         var forecast = result.data;
 
         // Insert the forecast data into the Mongo database Weather model
-        Meteor.call('insertWeather', forecast, f.name, function(error, result) {
+        Meteor.call('insertWeather', forecast, f.name, f.class, f.locOrder, function(error, result) {
             console.log('error - ', error);
             console.log('result - ', result);
         });
