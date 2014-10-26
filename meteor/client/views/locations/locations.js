@@ -5,11 +5,11 @@
  */
 
 Template.locations.created = function () {
-  //
+    //
 };
 
 Template.locations.helpers({
-  //
+    //
 });
 
 Template.locations.rendered = function () {
@@ -17,7 +17,7 @@ Template.locations.rendered = function () {
 };
 
 Template.locations.events({
-  //
+    //
 });
 
 Template.locWeather.helpers({
