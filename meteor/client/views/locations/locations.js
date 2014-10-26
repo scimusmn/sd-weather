@@ -22,46 +22,16 @@ Template.locations.helpers({
     }
 });
 
+/**
+ * Publish a limited set of the weather data for each individual location
+ */
 Template.singleLocation.helpers({
-    special: function() {
-        console.log('this - ', this);
-    },
-    weather: function() {
-        console.log('this - ', this);
-        return Weather.find({class: this._id});
+    weathers: function() {
+        // Filter the weather data by the current location ID
+        var result = Weather.find({class: this._id}, { sort: { time: -1 }, limit: 2 } );
+        return result;
     }
-    //weather: function() {
-        //console.log('this - ', this);
-        //console.log('this._id - ', this._id);
-        //return Weather.find({class: this._id});
-    //}
 });
-
-//Template.singleLocation.helpers({
-    //special: function() {
-        //console.log('Each time');
-        //return 'special';
-    //},
-    //weather: function() {
-        ////console.log('this._id - ', this._id);
-        //console.log('weatherResult - ', Weather.find({class: this._id}));
-        ////console.log('weatherResult - ', weatherResult);
-        //return Weather.find({class: this._id});
-    //}
-//});
-
-//Template.locWeather.helpers({
-    //weather: function() {
-        //return Weather.findOne( { class: this._id }, { sort: {time: -1} } );
-    //}
-//});
-
-//Template.locWeather.rendered = function () {
-//};
-
-
-
-
 
 function lowerSpacesToDashes(input) {
     if (input) {
