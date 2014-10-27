@@ -22,3 +22,18 @@ Handlebars.registerHelper('lowerSpacesToDashes', function(input) {
         return input.replace(/[\.,'-\/#!$%\^&\*;:{}=\-_`~()@\+\?><\[\]\+]/g, '').replace(/\s+/g, '-').toLowerCase();
     }
 });
+
+/**
+ * Zero to One percent
+ */
+Handlebars.registerHelper('percentMessage', function(input, suffix, zeroMessage) {
+    if (input === 0) {
+        return zeroMessage;
+    }
+    else {
+        if (suffix) {
+            return (input * 100) + '% ' + suffix;
+        }
+    }
+});
+
