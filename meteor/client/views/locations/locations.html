@@ -8,18 +8,19 @@
 
 <template name="singleLocation">
   <div class="single-location {{_id}}">
-    Single location
-    {{special}}
-    <div class="latest-temp">{{latestTemp}}</div>
+    <h1>{{title}}</h1>
+    <div class="current-weather">
+      <div class="temperature">{{latestWeather.temperature}}&deg;</div><br>
+      <div class="precip-probability">
+        {{percentMessage latestWeather.precipProbability 'chance of rain' 'No rain today'}}
+      </div>
+    </div>
     {{#each weathers}}
-      in here
-      {{> weather}}
+      {{> weather}},
     {{/each}}
   </div>
 </template>
 
 <template name="weather">
-  Weather template
-  <h3>Weather collection: temp = {{temperature}}</h3>
-  <h3>Weather collection: time = {{time}}</h3>
+  {{time}}:{{temperature}}
 </template>

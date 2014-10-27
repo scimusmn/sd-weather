@@ -18,7 +18,8 @@ Meteor.methods({
             time: forecast.currently.time,
             latitude: forecast.latitude,
             longitude: forecast.longitude,
-            temperature: forecast.currently.temperature
+            temperature: forecast.currently.temperature,
+            precipProbability: forecast.currently.precipProbability
         });
     },
 });

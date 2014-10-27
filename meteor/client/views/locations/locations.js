@@ -26,10 +26,10 @@ Template.locations.helpers({
  * Publish a limited set of the weather data for each individual location
  */
 Template.singleLocation.helpers({
-    latestTemp: function() {
+    latestWeather: function() {
         var result = Weather.findOne({class: this._id}, { sort: { time: -1 }});
         console.log('result - ', result);
-        return result.temperature;
+        return result;
     },
     weathers: function() {
         // Filter the weather data by the current location ID
