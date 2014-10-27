@@ -8,7 +8,11 @@
 
 <template name="singleLocation">
   <div class="single-location {{_id}}">
+
+    <!-- Location title -->
     <h1>{{title}}</h1>
+
+    <!-- Current weather block -->
     <div class="current-weather">
       <div class="temperature">
         {{{formatTemperature latestWeather.temperature}}}
@@ -18,6 +22,8 @@
         {{percentMessage latestWeather.precipProbability 'chance of rain' 'No rain today'}}
       </div>
     </div>
+
+    <!-- Weather data table -->
     <div class="weather-table">
       <table class="table table-condensed">
         <thead>
@@ -33,6 +39,7 @@
         </tbody>
       </table>
     </div>
+
   </div>
 </template>
 
