@@ -24,6 +24,24 @@ Handlebars.registerHelper('lowerSpacesToDashes', function(input) {
 });
 
 /**
+ * Format datetime strings
+ */
+Handlebars.registerHelper('formatDateTime', function(input) {
+    //return moment.unix(input).format('MM/DD/YYYY, H:mma');
+    var now = moment.unix(input);
+    return now.calendar();
+});
+
+/**
+ * Format temperature strings
+ */
+Handlebars.registerHelper('formatTemperature', function(input) {
+    // Round to one decimal place
+    var rounded = Math.round( input * 10 ) / 10;
+    return rounded + '&deg;';
+});
+
+/**
  * Zero to One percent
  */
 Handlebars.registerHelper('percentMessage', function(input, suffix, zeroMessage) {

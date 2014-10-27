@@ -10,17 +10,20 @@
   <div class="single-location {{_id}}">
     <h1>{{title}}</h1>
     <div class="current-weather">
-      <div class="temperature">{{{latestWeather.temperature}}}</div><br>
+      <div class="temperature">
+        {{{formatTemperature latestWeather.temperature}}}
+      </div>
+      <br>
       <div class="precip-probability">
         {{percentMessage latestWeather.precipProbability 'chance of rain' 'No rain today'}}
       </div>
     </div>
     {{#each weathers}}
-      {{> weather}},
+    {{> weather}}<br>
     {{/each}}
   </div>
 </template>
 
 <template name="weather">
-  {{time}}:{{temperature}}
+  {{formatDateTime time}} - {{{formatTemperature temperature}}}
 </template>

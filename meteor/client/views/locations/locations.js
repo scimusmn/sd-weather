@@ -27,27 +27,24 @@ Template.locations.helpers({
  */
 Template.singleLocation.helpers({
     latestWeather: function() {
+
         // Query client miniMongo
         var result = Weather.findOne({class: this._id}, { sort: { time: -1 }});
-        console.log('result - ', result);
-
-        // Format strings
-        result.temperature = formatWeather(result.temperature);
 
         return result;
     },
     weathers: function() {
         // Filter the weather data by the current location ID
-        var result = Weather.find({class: this._id}, { sort: { time: -1 }, limit: 2 } );
-        return result;
+        var results = Weather.find({class: this._id}, { sort: { time: -1 }, limit: 20 } );
+
+        if (results) {
+            console.log('results - ', results.fetch());
+        }
+
+        return results;
     }
 });
 
-function formatWeather(input) {
-    // Round to one decimal place
-    var rounded = Math.round( input * 10 ) / 10;
-    return rounded + '&deg;';
-}
 
 function lowerSpacesToDashes(input) {
     if (input) {
