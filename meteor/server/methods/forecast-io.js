@@ -21,7 +21,7 @@ var timerTestAsync = function(callback) {
  * it in a Meteor helper when we call it.
  */
 var checkForecastAsync = function(latitude, longitude, callback) {
-    var apiKey = '76cbd9069c2c764b31570a5f661fb8c3';
+    var apiKey = process.env.FORECASTAPI;
     var protocol = 'https://';
     var apiDomain = 'api.forecast.io';
     var apiType = 'forecast';
@@ -82,7 +82,7 @@ Meteor.methods({
 });
 
 var checkForecastCron = function(latitude, longitude) {
-    var apiKey = '76cbd9069c2c764b31570a5f661fb8c3';
+    var apiKey = process.env.FORECASTAPI;
     var protocol = 'https://';
     var apiDomain = 'api.forecast.io';
     var apiType = 'forecast';

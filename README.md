@@ -1,5 +1,9 @@
 # Simple weather application for San Diego
 
+## Setup
+    $ export FORECASTAPI="your-forecast-io-apikey"
+    $ meteor
+
 ## Tech
 * Meteor
 * D3
