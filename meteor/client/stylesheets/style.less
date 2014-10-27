@@ -23,27 +23,32 @@ body{
   float: left;
   color: @white;
   padding: 10px;
+  background-repeat: repeat;
+  background-blend-mode: multiply;
 }
+
+/*@paper-texture: url("/images/lightpaperfibers.png");*/
+@paper-texture: url("/images/ricepaper.png");
 
 .locations-grid .san-diego {
   width: 100%;
-  background: @san-diego;
+  background: @san-diego @paper-texture;
 }
 
 .anza-borego {
-  background: @anza-borego;
+  background: @anza-borego @paper-texture;
 }
 
 .imperial-beach {
-  background: @imperial-beach;
+  background: @imperial-beach @paper-texture;
 }
 
 .julian {
-  background: @julian;
+  background: @julian @paper-texture;
 }
 
 .palomar-mountain {
-  background: @palomar-mountain;
+  background: @palomar-mountain @paper-texture;
 }
 
 /* Location */
