@@ -27,9 +27,9 @@ Handlebars.registerHelper('lowerSpacesToDashes', function(input) {
  * Format datetime strings
  */
 Handlebars.registerHelper('formatDateTime', function(input) {
-    //return moment.unix(input).format('MM/DD/YYYY, H:mma');
-    var now = moment.unix(input);
-    return now.calendar();
+    return moment.unix(input).format('MM/DD/YYYY, h:mm:ss a');
+    //var now = moment.unix(input);
+    //return now.calendar();
 });
 
 /**
