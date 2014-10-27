@@ -10,7 +10,7 @@
   <div class="single-location {{_id}}">
     <h1>{{title}}</h1>
     <div class="current-weather">
-      <div class="temperature">{{latestWeather.temperature}}&deg;</div><br>
+      <div class="temperature">{{{latestWeather.temperature}}}</div><br>
       <div class="precip-probability">
         {{percentMessage latestWeather.precipProbability 'chance of rain' 'No rain today'}}
       </div>

@@ -27,8 +27,13 @@ Template.locations.helpers({
  */
 Template.singleLocation.helpers({
     latestWeather: function() {
+        // Query client miniMongo
         var result = Weather.findOne({class: this._id}, { sort: { time: -1 }});
         console.log('result - ', result);
+
+        // Format strings
+        result.temperature = formatWeather(result.temperature);
+
         return result;
     },
     weathers: function() {
@@ -37,6 +42,12 @@ Template.singleLocation.helpers({
         return result;
     }
 });
+
+function formatWeather(input) {
+    // Round to one decimal place
+    var rounded = Math.round( input * 10 ) / 10;
+    return rounded + '&deg;';
+}
 
 function lowerSpacesToDashes(input) {
     if (input) {
