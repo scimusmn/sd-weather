@@ -31,9 +31,10 @@ Router.onBeforeAction(filters.myFilter, {only: ['items']});
 Router.map(function() {
 
     /**
-     * Locations
+     * The homepage is a view of all the locations
      */
     this.route('locations', {
+        path: '/',
         waitOn: function () {
             return Meteor.subscribe('allLocations');
         },
@@ -43,27 +44,6 @@ Router.map(function() {
             //};
         //}
     });
-
-    //this.route('weather', {
-        //path: '/weather/:_id',
-        //waitOn: function () {
-            //return Meteor.subscribe('weather', this.params._id);
-        //},
-    //});
-
-
-
-    //this.route('location', {
-        //path: '/locations/:_id',
-        //waitOn: function () {
-            //return Meteor.subscribe('singleLocation', this.params._id);
-        //},
-        //data: function () {
-            //return {
-                //location: Locations.findOne(this.params._id)
-            //};
-        //}
-    //});
 
     /**
      * Items
@@ -89,13 +69,6 @@ Router.map(function() {
                 item: Items.findOne(this.params._id)
             };
         }
-    });
-
-
-    // Pages
-
-    this.route('homepage', {
-        path: '/'
     });
 
     this.route('content');
