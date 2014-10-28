@@ -33,6 +33,39 @@ Handlebars.registerHelper('formatDateTime', function(input) {
 });
 
 /**
+ * Format wind strings
+ */
+Handlebars.registerHelper('beaufortScale', function(input) {
+    var beaufortMaximiums = [1, 3, 7, 12, 17, 24, 30, 38, 46, 54, 63, 73];
+    var beaufortNames = [
+        'Calm',
+        'Light air',
+        'Light breeze',
+        'Gentle breeze',
+        'Moderate breeze',
+        'Fresh breeze',
+        'Strong breeze',
+        'High wind',
+        'Gale',
+        'Strong gale',
+        'Strong gale',
+        'Whole gale',
+        'Violent storm',
+        'Huricane force'
+    ];
+    // Loop through the Beaufort scalemaximum MPHs
+    // until our input is less then a value
+    for (var i in beaufortMaximiums) {
+        var speed = beaufortMaximiums[i];
+        if (speed > input) {
+            return beaufortNames[i];
+        }
+    }
+    return beaufortNames[12];
+});
+
+
+/**
  * Format temperature strings
  */
 Handlebars.registerHelper('formatTemperature', function(input) {
