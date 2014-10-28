@@ -90,20 +90,13 @@ Template.singleLocation.rendered = function () {
  */
 Template.singleLocation.helpers({
     latestWeather: function() {
-
         // Query client miniMongo
         var result = Weather.findOne({class: this._id}, { sort: { time: -1 }});
-
         return result;
     },
     weathers: function() {
         // Filter the weather data by the current location ID
         var results = Weather.find({class: this._id}, { sort: { time: -1 }, limit: 20 } );
-
-        if (results) {
-            console.log('results - ', results.fetch());
-        }
-
         return results;
     }
 });
