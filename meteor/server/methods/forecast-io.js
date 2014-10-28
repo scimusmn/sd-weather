@@ -126,7 +126,7 @@ SyncedCron.add({
         // every 5 minutes
         //
 
-        return parser.text('every 10 minutes');
+        return parser.text('every 4 minutes');
         //return parser.text('every 20 seconds');
         //return parser.text('every 5 seconds');
         //return parser.text('every 1 seconds');
