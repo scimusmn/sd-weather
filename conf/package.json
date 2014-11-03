@@ -1,4 +1,8 @@
 {
-  "name": "nw-demo",
-  "main": "http://example.com"
+  "name": "C2C-0109-wthr",
+  "main": "http://localhost:3000",
+  "window": {
+      "fullscreen": true,
+      "toolbar": false
+  }
 }
