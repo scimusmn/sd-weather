@@ -7,10 +7,10 @@
 </template>
 
 <template name="singleLocation">
-  <div class="single-location {{_id}}">
+  <div class="single-location {{lowerSpacesToDashes habitat}}">
 
     <!-- Location title -->
-    <h1>{{title}}</h1>
+    <h1>{{habitat}} - {{title}}</h1>
 
     <!-- Current weather block -->
     <div class="current-weather">
