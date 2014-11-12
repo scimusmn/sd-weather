@@ -70,6 +70,9 @@ Meteor.methods({
         var result;
         try {
             result = checkForecastSync(latitude, longitude);
+            //
+            // Print the forecast.io JSON result for debugging
+            //
             //console.log('Server checkForecast - ', result);
         }
         catch(e) {
@@ -101,7 +104,7 @@ var checkForecastCron = function(latitude, longitude) {
  * Cron process to check the forecast.io weather every X minutes
  */
 SyncedCron.add({
-    name: 'Check for the latest forecast.io weather data',
+    name: 'forecast.io api query',
     lastCheck: 'value',
     schedule: function(parser) {
         /**
@@ -195,8 +198,12 @@ SyncedCron.add({
 
         // Insert the forecast data into the Mongo database Weather model
         Meteor.call('insertWeather', forecast, f.name, f.class, f.locOrder, function(error, result) {
-            console.log('error - ', error);
-            console.log('result - ', result);
+            if (error) {
+                console.log('error - ', error);
+            }
+            if (result) {
+                console.log('result - ', result);
+            }
         });
 
         // Return to the SyncedCron collection so that we can track the
