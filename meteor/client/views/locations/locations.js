@@ -50,7 +50,7 @@ Template.singleLocation.rendered = function () {
         .attr('points',function() {
             return triA.join(',') + ' ' + triB.join(',') + ' ' + triC.join(',') + ' ' + triD.join(',');
         })
-        .style('fill', 'steelblue')
+        .style('fill', '#F6E9C7')
         .attr('transform', function() {
             return 'translate(' + ( svgWidth / 2 ) + ',' + ( svgHeight / 2 ) + ')';
         });
