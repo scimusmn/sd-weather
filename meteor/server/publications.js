@@ -37,17 +37,3 @@ Meteor.publish('allLocations', function() {
 //Meteor.publish('singleLocation', function(id) {
     //return Locations.find(id);
 //});
-
-/**
- * Items
- *
- * Publish all items
- */
-Meteor.publish('allItems', function() {
-    return Items.find();
-});
-
-// Publish a single item
-Meteor.publish('singleItem', function(id) {
-    return Items.find(id);
-});
