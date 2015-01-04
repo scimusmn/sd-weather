@@ -21,7 +21,7 @@ var timerTestAsync = function(callback) {
  * it in a Meteor helper when we call it.
  */
 var checkForecastAsync = function(latitude, longitude, callback) {
-    var apiKey = process.env.FORECASTAPI;
+    var apiKey = Meteor.settings.public.forecastAPI;
     var protocol = 'https://';
     var apiDomain = 'api.forecast.io';
     var apiType = 'forecast';
@@ -116,23 +116,13 @@ SyncedCron.add({
          *
          * If we query every few minutes that gives us a bit of padding on the
          * API limit.
+         *
+         * This loads the frequency sting from the config file at:
+         *     settings/settings.json
          */
-
-        //
-        // Dev cron timing
-        // Don't leave this running too long. It'll bork our API access
-        //return parser.text('every 20 seconds');
-        //
-
-        //
-        // Operational timing. I bet we only need to update the weather
-        // every 5 minutes
-        //
-
-        return parser.text('every 2 minutes');
-        //return parser.text('every 20 seconds');
-        //return parser.text('every 5 seconds');
-        //return parser.text('every 1 seconds');
+        var requestFreq = Meteor.settings.public.requestFreq;
+        console.log('requestFreq - ', requestFreq);
+        return parser.text(requestFreq);
     },
 
     job: function() {

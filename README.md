@@ -1,8 +1,18 @@
 # Simple weather application for San Diego
 
 ## Setup
-    $ export FORECASTAPI="your-forecast-io-apikey"
-    $ meteor
+
+### Define application settings
+    $ cd meteor/settings
+    $ cp settings.default.json settings.json
+
+Edit the settings.json file, defining your Forecast.io API key and how often
+you'd like to update the data. Set the frequency using natural language,
+based on [a later.js pattern](http://bunkat.github.io/later/parsers.html#text).
+
+### Start Meteor
+
+    $ meteor --settings settings.json --port 4000
 
 ## Tech
 * Meteor
