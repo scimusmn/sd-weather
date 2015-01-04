@@ -11,11 +11,10 @@
     <div class="border-box">
 
       <!-- Location title -->
-      <h1>
-        {{habitat}}
-        <br>
+
+      <h2>
         {{title}}
-      </h1>
+      </h2>
 
       <!-- Current weather block -->
       <div class="current-weather">
@@ -32,6 +31,9 @@
         <div class="wind-svg" data-wind-bearing="{{latestWeather.windBearing}}" data-wind-speed="{{latestWeather.windSpeed}}"></div>
         <div class="wind-speed">{{beaufortScale latestWeather.windSpeed}}</div>
       </div>
+      <h1>
+        {{habitat}}
+      </h1>
 
       <!-- Weather data table -->
       <!--<div class="weather-table">-->
