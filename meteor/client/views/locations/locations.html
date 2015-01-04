@@ -1,5 +1,5 @@
 <template name="locations">
-  <div class="locations-grid">
+  <div class="locations">
     {{#each locations}}
       {{> singleLocation}}
     {{/each}}
@@ -7,43 +7,49 @@
 </template>
 
 <template name="singleLocation">
-  <div class="single-location {{lowerSpacesToDashes habitat}}">
+  <div class="single-location {{lowerSpacesToDashes habitat}} {{_id}}">
+    <div class="border-box">
 
-    <!-- Location title -->
-    <h1>{{habitat}} - {{title}}</h1>
+      <!-- Location title -->
+      <h1>
+        {{habitat}}
+        <br>
+        {{title}}
+      </h1>
 
-    <!-- Current weather block -->
-    <div class="current-weather">
-      <div class="temperature">
-        {{{formatTemperature latestWeather.temperature}}}
+      <!-- Current weather block -->
+      <div class="current-weather">
+        <div class="temperature">
+          {{{formatTemperature latestWeather.temperature}}}
+        </div>
+        <br>
+        <div class="precip-probability">
+          {{percentMessage latestWeather.precipProbability 'chance of rain' 'No rain today'}}
+        </div>
+        <div class="wind-svg" data-wind-bearing="{{latestWeather.windBearing}}" data-wind-speed="{{latestWeather.windSpeed}}"></div>
+        <div class="wind-speed">{{beaufortScale latestWeather.windSpeed}}</div>
       </div>
-      <br>
-      <div class="precip-probability">
-        {{percentMessage latestWeather.precipProbability 'chance of rain' 'No rain today'}}
-      </div>
-      <div class="wind-svg" data-wind-bearing="{{latestWeather.windBearing}}" data-wind-speed="{{latestWeather.windSpeed}}"></div>
-      <div class="wind-speed">{{beaufortScale latestWeather.windSpeed}}</div>
+
+      <!-- Weather data table -->
+      <!--<div class="weather-table">-->
+        <!--<table class="table table-condensed">-->
+          <!--<thead>-->
+            <!--<tr>-->
+              <!--<th>Date time</th>-->
+              <!--<th>Temperature</th>-->
+              <!--<th>Wind speed</th>-->
+              <!--<th>Wind bearing</th>-->
+            <!--</tr>-->
+          <!--</thead>-->
+          <!--<tbody>-->
+            <!--{{#each weathers}}-->
+              <!--{{> weather}}-->
+            <!--{{/each}}-->
+          <!--</tbody>-->
+        <!--</table>-->
+      <!--</div>-->
+
     </div>
-
-    <!-- Weather data table -->
-    <!--<div class="weather-table">-->
-      <!--<table class="table table-condensed">-->
-        <!--<thead>-->
-          <!--<tr>-->
-            <!--<th>Date time</th>-->
-            <!--<th>Temperature</th>-->
-            <!--<th>Wind speed</th>-->
-            <!--<th>Wind bearing</th>-->
-          <!--</tr>-->
-        <!--</thead>-->
-        <!--<tbody>-->
-          <!--{{#each weathers}}-->
-            <!--{{> weather}}-->
-          <!--{{/each}}-->
-        <!--</tbody>-->
-      <!--</table>-->
-    <!--</div>-->
-
   </div>
 </template>
 

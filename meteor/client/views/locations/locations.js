@@ -59,6 +59,7 @@ Template.singleLocation.rendered = function () {
     weatherCollection.observeChanges({
         added: function () {
             var windRect = d3.select(selector + ' svg polygon');
+            //console.log('d3.select(selector)', d3.select(selector));
             var windBearing = d3.select(selector).attr('data-wind-bearing');
             windRect
                 .attr('transform', function() {
@@ -69,20 +70,20 @@ Template.singleLocation.rendered = function () {
 
     Deps.autorun(function(){
         // TODO - Do this with D3 instead of jQuery
-        //console.log('Deps - jQuery bearing - ', $(selector).data('wind-bearing'));
-        //console.log('Deps - jQuery speed - ', d3.select(selector).attr('data-wind-speed'));
+        console.log('Deps - jQuery bearing - ', $(selector).data('wind-bearing'));
+        console.log('Deps - jQuery speed - ', d3.select(selector).attr('data-wind-speed'));
     });
 
     window.setTimeout(function() {
-        //console.log('2000 - jQuery bearing - ', $(selector).data('wind-bearing'));
-        //console.log('2000 - jQuery speed - ', d3.select(selector).attr('data-wind-speed'));
+        console.log('2000 - jQuery bearing - ', $(selector).data('wind-bearing'));
+        console.log('2000 - jQuery speed - ', d3.select(selector).attr('data-wind-speed'));
     }, 2000);
 
-    //Weather.find().observe({
-        //changed: function () {
-            //console.log('The Weather collection changed');
-        //}
-    //});
+    Weather.find().observe({
+        changed: function () {
+            console.log('The Weather collection changed');
+        }
+    });
 };
 
 /**

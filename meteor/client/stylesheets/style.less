@@ -10,47 +10,91 @@ body{
   background: url("/images/background-map-01.jpg");
 }
 
-.locations-grid {
+.locations {
   position: absolute;
   background: #000;
   height: 1920px;
   top: 0;
   left: 0;
-  opacity: .5;
 }
 
-.locations-grid .single-location {
-  width: 50%;
-  height: 640px;
-  float: left;
+.single-location {
+  position: absolute;
+}
+
+.border-box {
+  width: 280px;
+  height: 400px;
+  position: relative;
   color: @white;
   padding: 10px;
+  opacity: .8;
   background-repeat: repeat;
   background-blend-mode: multiply;
-  overflow: hidden;
+  /*overflow: hidden;*/
+  border: 3px solid #fff;
 }
 
 /*@paper-texture: url("/images/lightpaperfibers.png");*/
 @paper-texture: url("/images/ricepaper.png");
 
-.locations-grid .canyons-and-streams {
-  width: 100%;
+/**
+ * Canyons
+ */
+.canyons-and-streams {
+  top: 1300px;
+  left: 160px;
+}
+
+.canyons-and-streams .border-box {
   background: @canyons-and-streams @paper-texture;
 }
 
+/**
+ * Coast
+ */
 .coast {
+  top: 300px;
+  left: 50px;
+}
+
+.coast .border-box {
   background: @coast @paper-texture;
 }
 
+/**
+ * Chaparral
+ */
 .chaparral {
+  top: 860px;
+  left: 90px;
+}
+
+.chaparral .border-box {
   background: @chaparral @paper-texture;
 }
 
+/**
+ * Mountains
+ */
 .mountains {
+  top: 390px;
+  left: 440px;
+}
+
+.mountains .border-box {
   background: @mountains @paper-texture;
 }
 
+/**
+ * Desert
+ */
 .desert {
+  top: 1200px;
+  left: 630px;
+}
+
+.desert .border-box {
   background: @desert @paper-texture;
 }
 
@@ -66,10 +110,6 @@ h1 {
 
 /* Current weather block */
 .current-weather {
-  float: right;
-  margin: 20px;
-  width: 50%;
-  background: rgba(30, 30, 30, .2);
   text-align: center;
 }
 
