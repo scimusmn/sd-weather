@@ -23,9 +23,12 @@
           {{{formatTemperature latestWeather.temperature}}}
         </div>
         <br>
-        <div class="precip-probability">
-          {{percentMessage latestWeather.precipProbability 'chance of rain' 'No rain today'}}
+        <div class="icon">
+          <i class="wi {{translateIcon latestWeather.icon}}"></i>
         </div>
+        <!--<div class="precip-probability">-->
+          <!--{{percentMessage latestWeather.precipProbability 'chance of rain' 'No rain today'}}-->
+        <!--</div>-->
         <div class="wind-svg" data-wind-bearing="{{latestWeather.windBearing}}" data-wind-speed="{{latestWeather.windSpeed}}"></div>
         <div class="wind-speed">{{beaufortScale latestWeather.windSpeed}}</div>
       </div>

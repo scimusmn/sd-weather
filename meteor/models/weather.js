@@ -18,6 +18,7 @@ Meteor.methods({
             time: forecast.currently.time,
             latitude: forecast.latitude,
             longitude: forecast.longitude,
+            icon: forecast.currently.icon,
             temperature: forecast.currently.temperature,
             precipProbability: forecast.currently.precipProbability,
             windSpeed: forecast.currently.windSpeed,
