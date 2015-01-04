@@ -25,7 +25,7 @@ Template.locations.helpers({
 Template.singleLocation.rendered = function () {
 
     var selector = '.' + this.data._id + ' .wind-svg';
-    var svgWidth = 100;
+    var svgWidth = 50;
     var svgHeight = 100;
     var svg = d3.select(selector)
         .append('svg')

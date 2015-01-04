@@ -26,33 +26,39 @@ body{
 }
 
 .border-box {
-  width: 370px;
-  /*height: 440px;*/
+  width: 400px;
+  /*height: 280px;*/
   position: relative;
   color: @white;
   opacity: .95;
   background-repeat: repeat;
   background-blend-mode: multiply;
   /*overflow: hidden;*/
-  border: 3px solid #fff;
+  padding-bottom: 20px;
+  -webkit-box-shadow: 2px 2px 20px #333;
+  /*border-radius: 20px;*/
+  overflow: hidden;
+  border: 4px solid #666;
+  /*border: 4px solid darken(#E7DCB4, 60%);*/
 }
 
 /* Habitat */
 h1 {
-  font-family: 'FuturaTS-Medium', sans-serif;
   text-align: center;
   display: block;
   margin: 0;
+  font-size: 30px;
   padding: 10px;
   background-blend-mode: multiply;
 }
 
 h2 {
+  font-family: 'FuturaTS-Medium', sans-serif;
   display: block;
   width: 100%;
   padding: 10px;
   margin: 0;
-  font-size:40px;
+  font-size: 40px;
   text-align: center;
 }
 
@@ -74,14 +80,14 @@ h2 {
 
 .canyons-and-streams h1 {
   background: darken(@canyons-and-streams, 10%) @paper-texture;
-  border-top: 1px solid darken(@canyons-and-streams, 20%);
+  border-bottom: 1px solid darken(@canyons-and-streams, 20%);
 }
 
 /**
  * Coast
  */
 .coast {
-  top: 300px;
+  top: 380px;
   left: 50px;
 }
 
@@ -91,15 +97,15 @@ h2 {
 
 .coast h1 {
   background: darken(@coast, 20%) @paper-texture;
-  border-top: 1px solid darken(@coast, 30%);
+  border-bottom: 1px solid darken(@coast, 30%);
 }
 
 /**
  * Chaparral
  */
 .chaparral {
-  top: 860px;
-  left: 90px;
+  top: 880px;
+  left: 50px;
 }
 
 .chaparral .border-box {
@@ -108,15 +114,15 @@ h2 {
 
 .chaparral h1 {
   background: darken(@chaparral, 20%) @paper-texture;
-  border-top: 1px solid darken(@chaparral, 30%);
+  border-bottom: 1px solid darken(@chaparral, 30%);
 }
 
 /**
  * Mountains
  */
 .mountains {
-  top: 390px;
-  left: 440px;
+  top: 440px;
+  left: 540px;
 }
 
 .mountains .border-box {
@@ -125,15 +131,15 @@ h2 {
 
 .mountains h1 {
   background: darken(@mountains, 5%) @paper-texture;
-  border-top: 1px solid darken(@mountains, 10%);
+  border-bottom: 1px solid darken(@mountains, 10%);
 }
 
 /**
  * Desert
  */
 .desert {
-  top: 1200px;
-  left: 630px;
+  top: 1160px;
+  left: 650px;
 }
 
 .desert .border-box {
@@ -142,7 +148,7 @@ h2 {
 
 .desert h1 {
   background: darken(@desert, 10%) @paper-texture;
-  border-top: 1px solid darken(@desert, 20%);
+  border-bottom: 1px solid darken(@desert, 20%);
 }
 
 
@@ -153,23 +159,47 @@ h2 {
 /* Current weather block */
 .current-weather {
   text-align: center;
+  margin-top: 20px;
 }
 
-.temperature {
-  font-size: 90px;
+.icon,
+.temperature,
+.wind{
+  float: left;
+  width: 33.3333%;
+  margin: 0;
+  text-align: center;
+  line-height: 90px;
 }
 
 .icon {
-  font-size: 30px;
+  font-size: 60px;
+  margin-top: 10px;
+}
+
+.temperature {
+  font-size: 102px;
+  font-weight: normal;
+  font-style: normal;
+}
+
+.deg {
+  font-size: 70px;
+  position: relative;
+  top: -20px;
+}
+
+.wind {
+  margin-top: 10px;
+  background: #CCC;
+}
+
+.wind-svg {
+  background: #DDD;
 }
 
 .precip-probability {
   font-size: 40px;
-}
-
-svg {
-  /*border: 1px solid #000;*/
-  /*background: rgba(0,0,0,.25)*/
 }
 
 /* Weather over time */

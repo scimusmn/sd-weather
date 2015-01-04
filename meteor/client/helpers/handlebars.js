@@ -89,7 +89,14 @@ Handlebars.registerHelper('beaufortScale', function(input) {
  * Format temperature strings
  */
 Handlebars.registerHelper('formatTemperature', function(input) {
-    return parseInt(input) + '&deg;';
+    return parseInt(input) + '<span class="deg">&deg;</span>';
+});
+
+/**
+ * Format wind speed strings
+ */
+Handlebars.registerHelper('formatWindSpeed', function(input) {
+    return oneDigit(input) + ' mph';
 });
 
 /**
