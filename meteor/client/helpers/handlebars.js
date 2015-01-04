@@ -85,15 +85,19 @@ Handlebars.registerHelper('beaufortScale', function(input) {
     return beaufortNames[12];
 });
 
-
 /**
  * Format temperature strings
  */
 Handlebars.registerHelper('formatTemperature', function(input) {
-    // Round to one decimal place
-    var rounded = Math.round( input * 10 ) / 10;
-    return rounded + '&deg;';
+    return parseInt(input) + '&deg;';
 });
+
+/**
+ * Round number to one decimal place
+ */
+function oneDigit(input) {
+    return rounded = Math.round( input * 10 ) / 10;
+}
 
 /**
  * Zero to One percent
