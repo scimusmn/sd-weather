@@ -16,3 +16,4 @@ Thanks to:
  * Justin Heideman for his [presentation on the development of the Minnesota Public Radio's weather pages](http://blogs.mpr.org/developer/2014/03/new-weather-pages-for-mpr-news/)
  * [Jonathan Arnaldo's meteorshowers application](https://github.com/jonarnaldo/meteorshowers)
  * [André F's qweather application](https://github.com/andre-f/qweather)
+ * [Erik Flower's Weather Icons](https://github.com/erikflowers/weather-icons)
