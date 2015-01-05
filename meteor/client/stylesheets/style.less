@@ -167,7 +167,10 @@ h2 {
 
 .icon,
 .temperature,
+.min-temp,
+.max-temp,
 .wind,
+.humidity,
 .precip-probability {
   position: absolute;
   margin: 0;
@@ -185,11 +188,25 @@ h2 {
 
 .temperature {
   top: 120px;
-  right: 59px;
+  right: 64px;
   width: 250px;
   font-size: 112px;
   font-weight: normal;
   font-style: normal;
+}
+
+.min-temp,
+.max-temp {
+  top: 190px;
+  font-size: 16px;
+}
+
+.min-temp {
+  left: 134px;
+}
+
+.max-temp {
+  left: 200px;
 }
 
 .deg {
@@ -198,22 +215,27 @@ h2 {
   top: -40px;
 }
 
+.min-temp .deg,
+.max-temp .deg{
+  display: none;
+}
+
 .wind {
-  top: 120px;
+  top: 117px;
   left: 290px;
-  margin-top: -16px;
   /*background: #CCC;*/
 }
 
 .wind-speed {
   font-size: 16px;
-  top: -80px;
+  top: -67px;
   left: 0;
   position: relative;
   letter-spacing: 1px;
 }
 
 .ordinals {
+  font-family: 'FuturaTS-Medium', sans-serif;
   fill: @white;
   font-size: 10px;
 }
@@ -226,10 +248,16 @@ h2 {
 
 /*}*/
 
+.precip-probability,
+.humidity {
+  font-size: 25px;
+  top: 270px;
+  left: 70px;
+  line-height: 35px;
+}
+
 .precip-probability {
-  top: 200px;
-  font-size: 40px;
-  width: 390px;
+  left: 190px;
 }
 
 /* Weather over time */

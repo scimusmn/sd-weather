@@ -115,8 +115,16 @@ Handlebars.registerHelper('percentMessage', function(input, suffix, zeroMessage)
     }
     else {
         if (suffix) {
-            return (input * 100) + '% ' + suffix;
+            return decimalToPercent(input)
         }
     }
 });
+
+Handlebars.registerHelper('decimalToPercent', function(input) {
+    return decimalToPercent(input);
+});
+
+function decimalToPercent(input) {
+    return oneDigit(input * 100) + '%';
+}
 

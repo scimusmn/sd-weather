@@ -34,6 +34,8 @@
         <div class="temperature">
           {{{formatTemperature latestWeather.temperature}}}
         </div>
+        <div class="min-temp">Low: {{{formatTemperature latestWeather.temperatureMin}}}</div>
+        <div class="max-temp">High: {{{formatTemperature latestWeather.temperatureMax}}}</div>
 
         <!-- Wind -->
         <div class="wind">
@@ -42,8 +44,13 @@
           <div class="wind-speed">{{formatWindSpeed latestWeather.windSpeed}}</div>
         </div>
         <br>
+        <div class="humidity">
+          Humidity<br>
+          {{decimalToPercent latestWeather.humidity}}
+        </div>
         <div class="precip-probability">
-          {{percentMessage latestWeather.precipProbability 'chance of rain' 'No rain today'}}
+          Chance of rain<br>
+          {{decimalToPercent latestWeather.precipProbability}}
         </div>
       </div>
       <!-- Weather data table -->
