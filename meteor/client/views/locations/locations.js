@@ -25,6 +25,8 @@ Template.locations.helpers({
 Template.singleLocation.rendered = function () {
 
     var offWhite = '#F6E9C7';
+    var midWhite = '#dbcfb2';
+    var darkWhite = '#c2b79d';
     var selector = '.' + this.data._id + ' .wind-svg';
     var svgWidth = 100;
     var svgHeight = 100;
@@ -133,23 +135,168 @@ Template.singleLocation.rendered = function () {
         .attr('class', 'ordinals')
         .text('W');
 
+    /**
+     * Dew point measurement
+     */
+    var dewSvgWidth = 150;
+    var dewSvgHeight = 100;
+    var dewSelector = '.' + this.data._id + ' .dew-svg';
+    var dewSvg = d3.select(dewSelector)
+        .append('svg')
+        .attr('width', dewSvgWidth)
+        .attr('height', dewSvgHeight);
 
-    //Deps.autorun(function(){
-        //// TODO - Do this with D3 instead of jQuery
-        //console.log('Deps - jQuery bearing - ', $(selector).data('wind-bearing'));
-        //console.log('Deps - jQuery speed - ', d3.select(selector).attr('data-wind-speed'));
-    //});
+    var minDew = 35;
+    var dryUpperBound = 50;
+    var niceUpperBound = 64;
+    var maxDew = 80;
 
-    //window.setTimeout(function() {
-        //console.log('2000 - jQuery bearing - ', $(selector).data('wind-bearing'));
-        //console.log('2000 - jQuery speed - ', d3.select(selector).attr('data-wind-speed'));
-    //}, 2000);
+    /**
+     * Arc settings
+     */
+    var backgroundArc = d3.svg.arc()
+        .outerRadius(50)
+        .innerRadius(35);
 
-    Weather.find().observe({
-        changed: function () {
-            console.log('The Weather collection changed');
+    var dewArcs = dewSvg.append('g');
+
+    /**
+     * Background arc
+     */
+    dewArcs
+        .append('path')
+        .style('fill', darkWhite)
+        .attr('opacity', 0.8)
+        .attr('id', 'path1')
+        .datum({startAngle: dewToRad(minDew), endAngle: dewToRad(maxDew)})
+        .attr('d', backgroundArc)
+
+    /**
+     * Dry arc
+     */
+    dewArcs
+        .append('path')
+        .style('fill', offWhite)
+        .attr('opacity', 0.5)
+        .datum({startAngle: dewToRad(minDew), endAngle: dewToRad(dryUpperBound)})
+        .attr('d', backgroundArc)
+
+    /**
+     * Comfy arc
+     */
+    dewArcs
+        .append('path')
+        .style('fill', midWhite)
+        .attr('opacity', 0.5)
+        .datum({startAngle: dewToRad(dryUpperBound), endAngle: dewToRad(niceUpperBound)})
+        .attr('d', backgroundArc)
+
+    dewArcs
+        .attr('transform', 'translate(' + dewSvgWidth / 2 + ',' + ( ( dewSvgHeight / 2 ) + 20 ) + ')');
+
+
+    var labelSize = 14;
+    var labelYOffset = -8;
+
+    dewArcs
+        .append("text")
+        .attr("x", 16)
+        .attr("dy", labelYOffset)
+        .append('textPath')
+        .attr('fill', offWhite)
+        .attr('font-size', labelSize + 'px')
+        .attr('letter-spacing', '1px')
+        .attr('xlink:href','#path1')
+        .text('Dry');
+
+    dewArcs
+        .append("text")
+        .attr("x", 57)
+        .attr("dy", labelYOffset)
+        .append('textPath')
+        .attr('fill', offWhite)
+        .attr('font-size', labelSize + 'px')
+        .attr('letter-spacing', '.2px')
+        .attr('xlink:href','#path1')
+        .text('Comfy');
+
+    dewArcs
+        .append("text")
+        .attr("x", 110)
+        .attr("dy", labelYOffset)
+        .append('textPath')
+        .attr('fill', offWhite)
+        .attr('font-size', labelSize + 'px')
+        .attr('letter-spacing', '.2px')
+        .attr('xlink:href','#path1')
+        .text('Muggy');
+
+    /**
+     * 20  = -0.25 * tau
+     * 80 =  0.25 * tau
+     */
+    function dewToRad (dewPoint) {
+        var tau = 2 * Math.PI;
+        var min = minDew;
+        var max = maxDew;
+        var proportion = (dewPoint - min) / (max - min);
+        var halfRadians = ( ( proportion / 2 ) - 0.25 ) * tau;
+        return halfRadians;
+    }
+
+    /**
+     * Dew Point indicator
+     */
+    var dewPointerGroup = dewSvg.append('g');
+    var pointerWidth = 40;
+    var pointerHeight = 40;
+    var pointerA = [0, 0];
+    var pointerB = [(pointerWidth / 2), ((pointerHeight / 2) - 8)];
+    var pointerC = [(pointerWidth / 2) + 2, (pointerHeight / 2) + 2];
+    var pointerD = [((pointerWidth / 2) - 8), (pointerHeight / 2)];
+    var pointerX = (pointerWidth / 2);
+    var pointerY = (pointerHeight / 2);
+    dewPointerGroup
+        .append('polygon')
+        .attr('points',function() {
+            return pointerA.join(',') + ' ' + pointerB.join(',') + ' ' + pointerC.join(',') + ' ' + pointerD.join(',');
+        })
+        .style('fill', '#e1d5b6');
+        //.attr('stroke', '#9a927d')
+        //.attr('stroke-width', 1.5)
+
+    dewPointerGroup
+        .attr('transform', function() {
+            return 'translate(' + ( dewSvgWidth / 2 ) + ',' + ( dewSvgHeight / 2 ) + ')';
+        });
+
+    var dewPoint = d3.select('.' + this.data._id + ' .dew-value').attr('data-dew-point');
+    dewPointerGroup
+        .attr('transform', function() {
+            var translate = 'translate(' +
+                ( dewSvgWidth / 2 ) +
+                ',' +
+                ( ( dewSvgHeight / 2 ) + 19 ) +
+                ')';
+            var rotate = 'rotate(' + (dewToPointerAngle(dewPoint)) + ',' + 0 + ',' + 0 + ')';
+            return translate + ' ' + rotate;
+        });
+
+    function dewToPointerAngle (dewPoint) {
+        var minDegrees = 135;
+        var maxDegrees = 315;
+        if (dewPoint < 35) {
+            dewPoint = 35;
         }
-    });
+        if (dewPoint > 80) {
+            dewPoint = 80;
+        }
+        var proportion = ((dewPoint - minDew) / (maxDew - minDew));
+        var offsetAngle = (proportion * 180);
+        var angle = parseInt(offsetAngle, 10) + parseInt(minDegrees, 10);
+        return angle;
+    }
+
 };
 
 /**

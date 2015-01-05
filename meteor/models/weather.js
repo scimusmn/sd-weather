@@ -22,6 +22,7 @@ Meteor.methods({
             temperature: forecast.currently.temperature,
             temperatureMin: forecast.daily.data[0].temperatureMin,
             temperatureMax: forecast.daily.data[0].temperatureMax,
+            dewPoint: forecast.currently.dewPoint,
             humidity: forecast.currently.humidity,
             precipProbability: forecast.currently.precipProbability,
             windSpeed: forecast.currently.windSpeed,

@@ -44,13 +44,21 @@
           <div class="wind-speed">{{formatWindSpeed latestWeather.windSpeed}}</div>
         </div>
         <br>
-        <div class="humidity">
-          Humidity<br>
-          {{decimalToPercent latestWeather.humidity}}
+        <div class="dew-point">
+          <div class="dew-svg"></div>
+          <div class="dew-value" data-dew-point="{{integer latestWeather.dewPoint}}">
+            Dew point
+            <!--<br>-->
+            <!--{{integer latestWeather.dewPoint}}-->
+          </div>
         </div>
+        <!--<div class="humidity">-->
+          <!--Humidity<br>-->
+          <!--{{decimalToPercent latestWeather.humidity}}-->
+        <!--</div>-->
         <div class="precip-probability">
-          Chance of rain<br>
-          {{decimalToPercent latestWeather.precipProbability}}
+          <div class="precip-percent">{{decimalToPercent latestWeather.precipProbability}}</div>
+          Chance of rain
         </div>
       </div>
       <!-- Weather data table -->

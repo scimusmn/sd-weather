@@ -27,7 +27,7 @@ body{
 
 .border-box {
   width: 398px;
-  height: 380px;
+  height: 430px;
   position: relative;
   color: @white;
   opacity: .95;
@@ -170,6 +170,7 @@ h2 {
 .min-temp,
 .max-temp,
 .wind,
+.dew-point,
 .humidity,
 .precip-probability {
   position: absolute;
@@ -249,15 +250,44 @@ h2 {
 /*}*/
 
 .precip-probability,
+.dew-point,
 .humidity {
   font-size: 25px;
   top: 270px;
-  left: 70px;
   line-height: 35px;
 }
 
+.dew-point {
+  left: 38px;
+}
+
+.dew-value {
+  position: absolute;
+  top: 73px;
+  left: 23px;
+}
+
+/*.dew-point {*/
+  /*background: #999;*/
+/*}*/
+
+/*.dew-point svg {*/
+  /*background: #EEE;*/
+/*}*/
+
+.humidity {
+  left: 130px;
+}
+
 .precip-probability {
-  left: 190px;
+  left: 215px;
+  top: 309px;
+}
+
+.precip-percent {
+  font-size: 50px;
+  margin-top: -7px;
+  margin-bottom: 6px;
 }
 
 /* Weather over time */
