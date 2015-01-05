@@ -45,17 +45,17 @@ Template.singleLocation.rendered = function () {
         .attr('cy', 0)
         .attr('fill', 'none')
         .attr('stroke', offWhite)
-        .attr('stroke-width', 1.5);
+        .attr('stroke-width', 4);
 
     /**
      * Draw wind arrow
      */
     var triWidth = 65;
     var triHeight = 65;
-    var triA = [5, 5];
-    var triB = [(triWidth / 2), ((triHeight / 2) - 12)];
-    var triC = [(triWidth / 2), (triHeight / 2)];
-    var triD = [((triWidth / 2) - 12), (triHeight / 2)];
+    var triA = [0, 0];
+    var triB = [(triWidth / 2), ((triHeight / 2) - 15)];
+    var triC = [(triWidth / 2) + 2, (triHeight / 2) + 2];
+    var triD = [((triWidth / 2) - 15), (triHeight / 2)];
     var triX = (triWidth / 2);
     var triY = (triHeight / 2);
     windGroup
@@ -108,13 +108,13 @@ Template.singleLocation.rendered = function () {
     svg
         .append('svg:text')
         .attr('x', 46)
-        .attr('y', 17)
+        .attr('y', 13)
         .attr('class', 'ordinals')
         .text('N');
 
     svg
         .append('svg:text')
-        .attr('x', 84)
+        .attr('x', 87)
         .attr('y', 54)
         .attr('class', 'ordinals')
         .text('E');
@@ -122,13 +122,13 @@ Template.singleLocation.rendered = function () {
     svg
         .append('svg:text')
         .attr('x', 47)
-        .attr('y', 94)
+        .attr('y', 96)
         .attr('class', 'ordinals')
         .text('S');
 
     svg
         .append('svg:text')
-        .attr('x', 6)
+        .attr('x', 4)
         .attr('y', 55)
         .attr('class', 'ordinals')
         .text('W');
