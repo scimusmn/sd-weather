@@ -27,15 +27,19 @@
         </div>
 
         <!-- Temperature -->
+        <!-- 3 digit temp for design tests -->
+        <!--<div class="temperature">-->
+          <!--100<span class="deg">°</span>-->
+        <!--</div>-->
         <div class="temperature">
           {{{formatTemperature latestWeather.temperature}}}
         </div>
 
         <!-- Wind -->
         <div class="wind">
+          <!--<div class="wind-svg" data-wind-bearing="0" data-wind-speed="{{latestWeather.windSpeed}}"></div>-->
           <div class="wind-svg" data-wind-bearing="{{latestWeather.windBearing}}" data-wind-speed="{{latestWeather.windSpeed}}"></div>
           <div class="wind-speed">{{formatWindSpeed latestWeather.windSpeed}}</div>
-          <!--<div class="wind-speed">{{beaufortScale latestWeather.windSpeed}}</div>-->
         </div>
         <br>
         <div class="precip-probability">
