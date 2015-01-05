@@ -118,6 +118,10 @@ Handlebars.registerHelper('percentMessage', function(input, suffix, zeroMessage)
     }
 });
 
+Handlebars.registerHelper('integer', function(input) {
+    return parseInt(input);
+});
+
 Handlebars.registerHelper('decimalToPercent', function(input) {
     return decimalToPercent(input);
 });
