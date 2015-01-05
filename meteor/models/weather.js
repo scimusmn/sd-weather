@@ -20,6 +20,9 @@ Meteor.methods({
             longitude: forecast.longitude,
             icon: forecast.currently.icon,
             temperature: forecast.currently.temperature,
+            temperatureMin: forecast.daily.data[0].temperatureMin,
+            temperatureMax: forecast.daily.data[0].temperatureMax,
+            humidity: forecast.currently.humidity,
             precipProbability: forecast.currently.precipProbability,
             windSpeed: forecast.currently.windSpeed,
             windBearing: forecast.currently.windBearing
