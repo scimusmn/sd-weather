@@ -14,7 +14,6 @@ Handlebars.registerHelper('thisYear', function(myArgument){
  * Translate Forecast.io icon strings into Eric Flowers' weather icon fonts
  */
 Handlebars.registerHelper('translateIcon', function(input) {
-    console.log('input - ', input);
     var dictionary = {
         'clear-day': 'wi-day-sunny',
         'clear-night': 'wi-night-clear',
@@ -27,7 +26,6 @@ Handlebars.registerHelper('translateIcon', function(input) {
         'partly-cloudy-day': 'wi-day-cloudy',
         'partly-cloudy-night': 'wi-night-cloudy',
     };
-    console.log('dictionary.input - ', dictionary[input]);
     return dictionary[input];
 });
 
