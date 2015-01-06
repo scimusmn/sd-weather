@@ -297,6 +297,153 @@ Template.singleLocation.rendered = function () {
         return angle;
     }
 
+    var markerSvgWidth = 1080;
+    var markerSvgHeight = 1920;
+    var markerId = this.data._id;
+    console.log('markerId - ', markerId);
+    var markerX;
+    var markerY;
+    var lineMarkerX;
+    var lineMarkerY;
+    var lineBoxX;
+    var lineBoxY;
+    var markerColor;
+    if (markerId == 'san-diego') {
+        markerX = 428;
+        markerY = 1355;
+        lineMarkerX = markerX + 1;
+        lineMarkerY = markerY + 7;
+        lineBoxX = markerX - 100;
+        lineBoxY = markerY + 75;
+        markerColor = '#585A25';
+    }
+    else if (markerId == 'temecula') {
+        markerX = 432;
+        markerY = 1175;
+        lineMarkerX = markerX + 1;
+        lineMarkerY = markerY + 6;
+        lineBoxX = markerX + 160;
+        lineBoxY = markerY - 20;
+        markerColor = '#C8171D';
+    }
+    else if (markerId == 'santa-monica') {
+        markerX = 161;
+        markerY = 1048;
+        lineMarkerX = markerX + 7;
+        lineMarkerY = markerY;
+        lineBoxX = markerX + 100;
+        lineBoxY = markerY - 90;
+        markerColor = '#477362';
+    }
+    else if (markerId == 'brawley') {
+        markerX = 738;
+        markerY = 1298;
+        lineMarkerX = markerX + 5;
+        lineMarkerY = markerY + 1;
+        lineBoxX = markerX + 40;
+        lineBoxY = markerY + 57;
+        markerColor = '#BA8D25';
+    }
+    else if (markerId == 'san-jacinto-peak'){
+        markerX = 520;
+        markerY = 1100;
+        lineMarkerX = markerX + 8;
+        lineMarkerY = markerY - 2;
+        lineBoxX = markerX + 150;
+        lineBoxY = markerY - 410;
+        markerColor = '#162423';
+    }
+    var markerSelector = '.' + markerId + ' .marker-svg';
+    var markerSvg = d3.select(markerSelector)
+        .append('svg')
+        .attr('width', markerSvgWidth)
+        .attr('height', markerSvgHeight);
+
+
+    var lineGroup = markerSvg.append('g');
+
+    var markerGroup = markerSvg.append('g');
+
+    var lineData = [ { 'x': lineMarkerX, 'y': lineMarkerY }, { 'x': lineBoxX,  'y': lineBoxY} ];
+
+    var lineFunction = d3.svg.line()
+        .x(function(d) { return d.x; })
+        .y(function(d) { return d.y; })
+        .interpolate('linear');
+
+    var lineGraph = lineGroup.append('path')
+        .attr('d', lineFunction(lineData))
+        .attr('stroke', '#444')
+        .attr('stroke-width', 1.5)
+        .attr('fill', 'none');
+
+    markerGroup
+        .append('path')
+        .attr('r', 16)
+        .attr('cx', 5)
+        .attr('cy', 5)
+        .attr('stroke', '#555')
+        .attr('stroke-width', 2)
+        .attr('filter', 'url(#blur)');
+
+    /**
+     * Marker shadow
+     */
+    markerGroup
+        .append('circle')
+        .attr('r', 16)
+        .attr('cx', 5)
+        .attr('cy', 5)
+        .attr('stroke', '#555')
+        .attr('stroke-width', 2)
+        .attr('filter', 'url(#blur)');
+
+    /**
+     * Stroke circle
+     */
+    markerGroup
+        .append('circle')
+        .attr('r', 16)
+        .attr('cx', 5)
+        .attr('cy', 5)
+        .attr('stroke', '#555')
+        .attr('stroke-width', 2);
+
+    /**
+     * Marker circle
+     */
+    markerGroup
+        .append('circle')
+        .attr('r', 15)
+        .attr('cx', 5)
+        .attr('cy', 5)
+        .attr('stroke', offWhite)
+        .attr('stroke-width', 2)
+        .attr('fill', markerColor);
+
+    var filter = markerGroup.append('defs')
+        .append('filter')
+        .attr('id', 'blur')
+        .attr('y', '-50%')
+        .attr('x', '-50%')
+        .attr('width', '200%')
+        .attr('height', '200%')
+        .append('feGaussianBlur')
+        .attr('stdDeviation', 3);
+
+    /**
+     * Position markers
+     */
+    markerGroup
+        .attr('transform', function() {
+            var translate = 'translate(' +
+                ( markerX ) +
+                ',' +
+                ( markerY ) +
+                ')';
+            return translate;
+        });
+
 };
 
 /**

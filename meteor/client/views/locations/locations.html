@@ -7,6 +7,9 @@
 </template>
 
 <template name="singleLocation">
+  <div class="marker {{_id}}">
+    <div class="marker-svg"></div>
+  </div>
   <div class="single-location {{lowerSpacesToDashes habitat}} {{_id}}">
     <div class="border-box">
 
@@ -61,6 +64,7 @@
           Chance of rain
         </div>
       </div>
+
       <!-- Weather data table -->
       <!--<div class="weather-table">-->
         <!--<table class="table table-condensed">-->

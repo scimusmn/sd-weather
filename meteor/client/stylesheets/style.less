@@ -9,8 +9,17 @@
 
 body{
   font-family: 'FuturaTS-Light', sans-serif;
-  background: url("/images/background-map-04.jpg");
+  background: url("/images/background-map-06.jpg");
   background-repeat: no-repeat;
+}
+
+.marker {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1080px;
+  height: 1920px;
+  background: transparent;
 }
 
 .locations {
@@ -69,17 +78,19 @@ h2 {
 /**
  * Box positions
  */
-@box-left-left: 110px;
+@box-left-left: 90px;
 @box-right-left: 590px;
+
 @box-top-top: 260px;
 @box-middle-top: 790px;
-@box-bottom-top: 1330px;
+@box-bottom-top: 1390px;
 
 /**
  * Canyons
  */
 .canyons-and-streams {
-  top: @box-bottom-top;
+  /*top: @box-bottom-top;*/
+  top: 1430px;
   left: @box-left-left;
 }
 
@@ -97,7 +108,8 @@ h2 {
  * Coast
  */
 .coast {
-  top: @box-top-top;
+  /*top: @box-top-top;*/
+  top: 532px;
   left: @box-left-left;
 }
 
@@ -115,7 +127,7 @@ h2 {
  * Chaparral
  */
 .chaparral {
-  top: @box-top-top;
+  top: @box-middle-top;
   left: @box-right-left;
 }
 
@@ -133,7 +145,7 @@ h2 {
  * Mountains
  */
 .mountains {
-  top: @box-middle-top;
+  top: @box-top-top;
   left: @box-right-left;
 }
 
@@ -151,7 +163,8 @@ h2 {
  * Desert
  */
 .desert {
-  top: @box-bottom-top;
+  /*top: @box-bottom-top;*/
+  top: 1355px;
   left: @box-right-left;
 }
 

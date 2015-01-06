@@ -29,7 +29,7 @@ if (Locations.find().count() === 0) {
     });
     Locations.insert({
         _id: 'temecula',
-        order: 2,
+        order: 4,
         habitat: 'Chaparral',
         title: 'Temecula',
         latitude: '33.503333',
@@ -45,7 +45,7 @@ if (Locations.find().count() === 0) {
     });
     Locations.insert({
         _id: 'brawley',
-        order: 4,
+        order: 2,
         habitat: 'Desert',
         title: 'Brawley',
         latitude: '32.978611',
