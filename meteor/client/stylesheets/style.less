@@ -9,7 +9,7 @@
 
 body{
   font-family: 'FuturaTS-Light', sans-serif;
-  background: url("/images/background-map-01.jpg");
+  background: url("/images/background-map-04.jpg");
   background-repeat: no-repeat;
 }
 
@@ -67,11 +67,20 @@ h2 {
 @paper-texture: url("/images/ricepaper.png");
 
 /**
+ * Box positions
+ */
+@box-left-left: 110px;
+@box-right-left: 590px;
+@box-top-top: 260px;
+@box-middle-top: 790px;
+@box-bottom-top: 1330px;
+
+/**
  * Canyons
  */
 .canyons-and-streams {
-  top: 1300px;
-  left: 160px;
+  top: @box-bottom-top;
+  left: @box-left-left;
 }
 
 .canyons-and-streams .border-box {
@@ -88,8 +97,8 @@ h2 {
  * Coast
  */
 .coast {
-  top: 380px;
-  left: 50px;
+  top: @box-top-top;
+  left: @box-left-left;
 }
 
 .coast .border-box {
@@ -106,12 +115,13 @@ h2 {
  * Chaparral
  */
 .chaparral {
-  top: 880px;
-  left: 50px;
+  top: @box-top-top;
+  left: @box-right-left;
 }
 
 .chaparral .border-box {
   background: @chaparral @paper-texture;
+  border: 1px solid darken(@chaparral, 30%);
 }
 
 .chaparral h1 {
@@ -123,8 +133,8 @@ h2 {
  * Mountains
  */
 .mountains {
-  top: 440px;
-  left: 540px;
+  top: @box-middle-top;
+  left: @box-right-left;
 }
 
 .mountains .border-box {
@@ -141,8 +151,8 @@ h2 {
  * Desert
  */
 .desert {
-  top: 1160px;
-  left: 650px;
+  top: @box-bottom-top;
+  left: @box-right-left;
 }
 
 .desert .border-box {
