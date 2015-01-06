@@ -332,7 +332,7 @@ Template.singleLocation.rendered = function () {
         lineMarkerX = markerX + 7;
         lineMarkerY = markerY;
         lineBoxX = markerX + 100;
-        lineBoxY = markerY - 90;
+        lineBoxY = markerY - 358;
         markerColor = '#477362';
     }
     else if (markerId == 'brawley') {
@@ -341,7 +341,7 @@ Template.singleLocation.rendered = function () {
         lineMarkerX = markerX + 5;
         lineMarkerY = markerY + 1;
         lineBoxX = markerX + 40;
-        lineBoxY = markerY + 57;
+        lineBoxY = markerY + 133;
         markerColor = '#BA8D25';
     }
     else if (markerId == 'san-jacinto-peak'){
