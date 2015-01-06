@@ -85,7 +85,7 @@ Meteor.methods({
 });
 
 var checkForecastCron = function(latitude, longitude) {
-    var apiKey = process.env.FORECASTAPI;
+    var apiKey = Meteor.settings.public.forecastAPI;
     var protocol = 'https://';
     var apiDomain = 'api.forecast.io';
     var apiType = 'forecast';
