@@ -1,4 +1,12 @@
-# Simple weather application for San Diego
+# San Diego Current Weather
+
+Current Weather dashboard for the San Diego Natural History Museum's [Coast to 
+Cactus exhibit](http://www.sdnhm.org/exhibitions/current-exhibitions/coast-to-cactus-in-southern-california/).
+
+## Tech
+sd-weather is a [Meteor](https://www.meteor.com/) application using D3 for some presentation elements and the Forecast.io weather API for data.
+
+The application is specifically designed to run within a fullscreen instance of Chrome on a 1080x1920 32" vertical monitor.
 
 ## Setup
 
@@ -14,9 +22,7 @@ based on [a later.js pattern](http://bunkat.github.io/later/parsers.html#text).
 
     $ meteor --settings settings.json --port 4000
 
-## Tech
-* Meteor
-* D3
+
 
 ## Credits
 Thanks to:
