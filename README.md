@@ -20,9 +20,7 @@ based on [a later.js pattern](http://bunkat.github.io/later/parsers.html#text).
 
 ### Start Meteor
 
-    $ meteor --settings settings.json --port 4000
-
-
+    $ meteor --settings settings/settings.json --port 4000
 
 ## Credits
 Thanks to:
