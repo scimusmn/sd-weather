@@ -1,4 +1,9 @@
 /**
+ * Start cron process when the meteor app launches
+ */
+SyncedCron.start();
+
+/**
  * Cron process to check the forecast.io weather every X minutes
  */
 SyncedCron.add({
@@ -98,11 +103,6 @@ SyncedCron.add({
         return f;
     }
 });
-
-/**
- * Start cron process when the meteor app launches
- */
-SyncedCron.start();
 
 /**
  * Timer async example.
