@@ -3,6 +3,7 @@
   "unused": true,
   "camelcase": true,
   "curly": true,
+  "maxdepth": 2,
   "quotmark": true,
   "globals": {
     // jQuery
@@ -24,6 +25,7 @@
     "Deps": false,
     "Router": false,
     "Locations": false,
-    "Items": false
+    "Items": false,
+    "HTTP": false
   }
 }

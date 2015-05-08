@@ -24,17 +24,17 @@ SyncedCron.add({
          * updated with Forecast.io
          */
         var cronCollection = SyncedCron._collection;
+
         // Only get the latest result. Ignore entries with no results (errors)
         var latestCron = cronCollection.findOne(
             { result: { $exists: true } }, {sort: {finishedAt: -1}, limit:1}
         );
-        //console.log('latestCron - ', latestCron);
 
         // Make sure to populate the value even if it doesn't exist in the DB
         //
         // This can happen during testing or if the location numbers change.
         var latestOrder;
-        if(typeof latestCron === 'undefined'){
+        if (typeof latestCron === 'undefined') {
             latestOrder = 0;
         }
         else {
@@ -46,13 +46,13 @@ SyncedCron.add({
             }
         }
 
-        //
-        // Itterate the locaction order. Loop back around to the start if we
-        // get to the max.
-        //
+        /**
+         * Itterate the locaction order. Loop back around to the start if we
+         * get to the max.
+         */
         var locationsNum = Locations.find().count();
         var locOrder;
-        if ( latestOrder === ( locationsNum - 1 ) ) {
+        if (latestOrder === (locationsNum - 1)) {
             locOrder = 0;
         }
         else {
@@ -60,14 +60,13 @@ SyncedCron.add({
         }
 
         // Get details about the location we're about to check
-        var locationToRequest = Locations.findOne( { order: locOrder });
-        //console.log('locationToRequest - ', locationToRequest);
+        var locationToRequest = Locations.findOne({ order: locOrder });
 
-        //
-        // Generate a forecast request reponse object to save to the
-        // cron collection. This lets us know the history of cron operations
-        // so that we can be efficient with our requests.
-        //
+        /**
+         * Generate a forecast request reponse object to save to the cron
+         * collection. This lets us know the history of cron operations so
+         * that we can be efficient with our requests.
+         */
         var f = {};
         f.name = locationToRequest.title;
         f.class = locationToRequest._id;
@@ -84,17 +83,23 @@ SyncedCron.add({
             if (error) {
                 console.log('error - ', error);
             }
+
             if (result) {
                 console.log('result - ', result);
             }
         });
 
-        // Return to the SyncedCron collection so that we can track the
-        // previous cron details next time around.
+        /**
+         * Return to the SyncedCron collection so that we can track the
+         * previous cron details next time around.
+         */
         return f;
     }
 });
 
+/**
+ * Request JSON object of the weather data from forecast.io
+ */
 var checkForecastCron = function(latitude, longitude) {
     var apiKey = Meteor.settings.public.forecastAPI;
     var protocol = 'https://';
@@ -107,6 +112,5 @@ var checkForecastCron = function(latitude, longitude) {
         latitude + ',' +
         longitude;
     var forecastResult = HTTP.get(url);
-    //console.log('Cron result - forecastResult - ', forecastResult);
     return forecastResult;
 };
