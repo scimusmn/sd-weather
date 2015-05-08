@@ -121,7 +121,6 @@ SyncedCron.add({
          *     settings/settings.json
          */
         var requestFreq = Meteor.settings.public.requestFreq;
-        console.log('requestFreq - ', requestFreq);
         return parser.text(requestFreq);
     },
 
