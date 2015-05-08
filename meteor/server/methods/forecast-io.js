@@ -73,7 +73,7 @@ SyncedCron.add({
         f.latitude = locationToRequest.latitude;
         f.longitude = locationToRequest.longitude;
         f.locOrder = locOrder;
-        var result = checkForecastCron(f.latitude, f.longitude);
+        var result = queryForecast(f.latitude, f.longitude);
 
         // Get the data object from the JSON response
         var forecast = result.data;
@@ -100,7 +100,7 @@ SyncedCron.add({
 /**
  * Request JSON object of the weather data from forecast.io
  */
-var checkForecastCron = function(latitude, longitude) {
+var queryForecast = function(latitude, longitude) {
     var apiKey = Meteor.settings.public.forecastAPI;
     var protocol = 'https://';
     var apiDomain = 'api.forecast.io';
