@@ -13,6 +13,8 @@
     // Normal stuff
     "window": false,
     "console": false,
+    // SyncedCron module
+    "SyncedCron": false,
     // D3
     "d3": false,
     "topojson": false,
