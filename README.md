@@ -18,6 +18,10 @@ Edit the settings.json file, defining your Forecast.io API key and how often
 you'd like to update the data. Set the frequency using natural language,
 based on [a later.js pattern](http://bunkat.github.io/later/parsers.html#text).
 
+The forecast.io API allows us 1000 calls per day for free. We have 5 locations.
+Which gives us 200 calls per location per day. If we query every few minutes
+that gives us a bit of padding on the API limit.
+
 ### Start Meteor
 
     $ meteor --settings settings/settings.json --port 4000

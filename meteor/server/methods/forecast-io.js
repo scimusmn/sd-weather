@@ -11,16 +11,7 @@ SyncedCron.add({
     lastCheck: 'value',
     schedule: function(parser) {
         /**
-         * Query calculations
-         *
-         * The forecast.io API allows us 1000 calls per day for free.
-         *
-         * We have 5 locations. Which gives us 200 calls per location per day.
-         *
-         * If we query every few minutes that gives us a bit of padding on the
-         * API limit.
-         *
-         * This loads the frequency sting from the config file at:
+         * Load the frequency sting from the config file at:
          *     settings/settings.json
          */
         var requestFreq = Meteor.settings.public.requestFreq;
