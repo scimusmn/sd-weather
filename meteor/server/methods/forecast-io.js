@@ -19,53 +19,18 @@ SyncedCron.add({
     },
 
     job: function() {
-        /**
-         * Check the cron history to find the order of the location previously
-         * updated with Forecast.io
-         */
-        var cronCollection = SyncedCron._collection;
 
-        // Only get the latest result. Ignore entries with no results (errors)
-        var latestCron = cronCollection.findOne(
-            { result: { $exists: true } }, {sort: {finishedAt: -1}, limit:1}
-        );
-
-        // Make sure to populate the value even if it doesn't exist in the DB
-        //
-        // This can happen during testing or if the location numbers change.
-        var latestOrder;
-        if (typeof latestCron === 'undefined') {
-            latestOrder = 0;
-        }
-        else {
-            if (latestCron.result.hasOwnProperty('locOrder')) {
-                latestOrder = latestCron.result.locOrder;
-            }
-            else {
-                latestOrder = 0;
-            }
-        }
-
-        /**
-         * Itterate the locaction order. Loop back around to the start if we
-         * get to the max.
-         */
-        var locationsNum = Locations.find().count();
-        var locOrder;
-        if (latestOrder === (locationsNum - 1)) {
-            locOrder = 0;
-        }
-        else {
-            locOrder = parseInt(latestOrder) + 1;
-        }
+        // Get the order of the location to check
+        var locOrder = getCurrentOrder();
 
         // Get details about the location we're about to check
         var locationToRequest = Locations.findOne({ order: locOrder });
 
         /**
-         * Generate a forecast request reponse object to save to the cron
-         * collection. This lets us know the history of cron operations so
-         * that we can be efficient with our requests.
+         * Generate a forecast request reponse object.
+         *
+         * Saving the forecast history lets us know the history of cron
+         * operations so that we can be efficient with our requests.
          */
         var f = {};
         f.name = locationToRequest.title;
@@ -73,6 +38,8 @@ SyncedCron.add({
         f.latitude = locationToRequest.latitude;
         f.longitude = locationToRequest.longitude;
         f.locOrder = locOrder;
+
+        // Query forecast.io for weather data
         var result = queryForecast(f.latitude, f.longitude);
 
         // Get the data object from the JSON response
@@ -90,12 +57,78 @@ SyncedCron.add({
         });
 
         /**
+         * We aren't displaying any historical information about the data, so
+         * there's no reason to save it. There are plenty of reasons not to
+         * save it, namely diskspace and long run DB happiness.
+         */
+        deleteOldData(forecast.currently.time);
+
+        /**
          * Return to the SyncedCron collection so that we can track the
          * previous cron details next time around.
          */
         return f;
     }
 });
+
+/**
+ * Delete weather data after a few minutes
+ */
+function deleteOldData(currentTime) {
+    // Save 30 minutes worth
+    var secondsBackToSave = 30 * 60;
+    var timeCutoff = currentTime - secondsBackToSave;
+    Weather.remove({time: {$lt: timeCutoff}})
+}
+
+/**
+ * Check the cron history to find the order of the location previously
+ * updated with Forecast.io
+ */
+function getLatestOrder() {
+    var cronCollection = SyncedCron._collection;
+
+    // Only get the latest result. Ignore entries with no results (errors)
+    var latestCron = cronCollection.findOne(
+        { result: { $exists: true } }, {sort: {finishedAt: -1}, limit:1}
+    );
+
+    // Make sure to populate the value even if it doesn't exist in the DB
+    // This can happen during testing or if the location numbers change.
+    var latestOrder;
+    if (typeof latestCron === 'undefined') {
+        latestOrder = 0;
+    }
+    else {
+        if (latestCron.result.hasOwnProperty('locOrder')) {
+            latestOrder = latestCron.result.locOrder;
+        }
+        else {
+            latestOrder = 0;
+        }
+    }
+
+    return latestOrder;
+}
+
+/**
+ * Itterate the locaction order. Loop back around to the start if we
+ * get to the max.
+ */
+function getCurrentOrder() {
+    var latestOrder = getLatestOrder();
+    var locationsNum = Locations.find().count();
+    var locOrder;
+
+    if (latestOrder === (locationsNum - 1)) {
+        locOrder = 0;
+    }
+    else {
+        locOrder = parseInt(latestOrder) + 1;
+    }
+
+    return locOrder;
+}
 
 /**
  * Request JSON object of the weather data from forecast.io
