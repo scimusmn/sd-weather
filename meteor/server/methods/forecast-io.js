@@ -7,7 +7,7 @@ SyncedCron.start();
  * Cron process to check the forecast.io weather every X minutes
  */
 SyncedCron.add({
-    name: 'forecast.io api query',
+    name: 'weather api query',
     lastCheck: 'value',
     schedule: function(parser) {
         /**
@@ -136,7 +136,7 @@ function getCurrentOrder() {
 var queryForecast = function(latitude, longitude) {
     var apiKey = Meteor.settings.public.forecastAPI;
     var protocol = 'https://';
-    var apiDomain = 'api.forecast.io';
+    var apiDomain = 'api.darksky.net';
     var apiType = 'forecast';
     var url = protocol +
         apiDomain + '/' +
